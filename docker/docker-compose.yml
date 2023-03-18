@@ -1,0 +1,20 @@
+version: "3.6"
+
+networks:
+  mssql_net:
+    name: mssql_net
+    driver: bridge
+      
+services:
+  mssql:
+    build:
+      context: .
+      dockerfile: sqlserver/Dockerfile
+    networks:
+      - mssql_net
+    environment:
+      - SA_PASSWORD=P@55w0rd
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Express
+    ports:
+      - ${SQL_PORT:-1433}:1433

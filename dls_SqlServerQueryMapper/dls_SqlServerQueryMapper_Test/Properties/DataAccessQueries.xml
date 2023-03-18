@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <queries>
+    <query name="weatherForecastQuery">
+      <![CDATA[
+        SELECT  
+	        CT.Name AS City,
+          WF.Date AS Date,
+	        WF.TemperatureC AS TemperatureC,
+	        WF.Summary AS Summary
+        FROM WEATHERFORECAST AS WF
+        INNER JOIN CITY AS CT ON CT.Id = WF.CityId
+        ${whereConditions}
+        ORDER BY WF.Date DESC
+        ${paginationConditions}
+      ]]>
+    </query>
+    <query name="cityQuery">
+      <![CDATA[
+        SELECT 
+          CT.Id AS Id
+        FROM CITY AS CT
+        ${whereConditions}
+      ]]>
+    </query>
+    <query name="newCityQuery">
+      <![CDATA[
+        INSERT INTO CITY (Name)
+        OUTPUT INSERTED.ID
+        VALUES (@cityName)
+      ]]>
+    </query>
+    <query name="newWeatherForecastQuery">
+      <![CDATA[
+        INSERT INTO WEATHERFORECAST (Date, TemperatureC, Summary, CityId)
+        VALUES (@date, @temperatureC, @summary, @cityId)
+      ]]>
+    </query>
+    <query name="removeWeatherForecastQuery">
+      <![CDATA[
+        DELETE FROM WEATHERFORECAST
+        ${whereConditions}
+      ]]>
+    </query>
+    <query name="changeWeatherForecastQuery">
+      <![CDATA[
+        UPDATE WEATHERFORECAST
+        SET Date = @dateValue, 
+	        TemperatureC = @temperatureCValue, 
+	        Summary = @summaryText, 
+	        CityId = (SELECT TOP (1) CT.Id FROM CITY AS CT WHERE CT.Name LIKE @cityName)
+        ${whereConditions}
+      ]]>
+    </query>
+  </queries>
+</root>
