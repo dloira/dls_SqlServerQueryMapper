@@ -94,7 +94,7 @@ echo "$0: SQL Server Database ready"
 Once you get installed Docker Desktop locally https://www.docker.com/products/docker-desktop/, to run the docker compose file it is only needed to run the terminal prompt, place the path where the file is and execute the following command.
 
 ```
-docker-compose -f docker-compose.yml up -d
+docker-compose -f docker-compose.yaml up -d
 ```
 
 ## Running the tests
