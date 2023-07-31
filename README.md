@@ -26,7 +26,7 @@ Docker Compose tool was used to provide an easy way to get up a local SqlServer 
 
 The docker-compose.yml file, within docker folder, build the image running the DockerFile; it was made in this way to run the container from an image with the required database already created.
 
-```
+```docker
 version: "3.6"
 
 networks:
@@ -49,7 +49,7 @@ services:
       - ${SQL_PORT:-1433}:1433
 ```
 
-```
+```docker
 FROM mcr.microsoft.com/mssql/server:2022-latest
 USER root
 EXPOSE 1433
@@ -65,13 +65,13 @@ RUN dos2unix -F /docker-entrypoint*
 ENTRYPOINT ["/docker-entrypoint.sh"]
 ```
 
-```
+```bash
 #!/bin/bash
 echo "$0: Starting SQL Server"
 docker-entrypoint-initdb.sh & /opt/mssql/bin/sqlservr
 ```
 
-```
+```bash
 #!/bin/bash
 
 # wait for database to start...
@@ -93,7 +93,7 @@ echo "$0: SQL Server Database ready"
 
 Once you get installed Docker Desktop locally https://www.docker.com/products/docker-desktop/, to run the docker compose file it is only needed to run the terminal prompt, place the path where the file is and execute the following command.
 
-```
+```bash
 docker-compose -f docker-compose.yaml up -d
 ```
 
