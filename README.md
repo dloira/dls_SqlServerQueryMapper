@@ -1,4 +1,4 @@
-# Sql Server Query Mapper
+# Proxy pattern for handling database access over ADO.NET
 
 Here, you could find an approach to use the Proxy pattern for handling the database access over ADO.NET. Currently, the market is plenty of really nice tools to work with databases; nevertheless, once the code is running in production environment, the performance tunning tasks could become tough when an ORM is involved. Hands up who has never dreamed of owning a magic wand, when your database administrator colleague phones you under water because one of your queries is collapsing the server and you can not find it in your code because the ORM is making it for you behind its wonderfull abstract language !!
 
